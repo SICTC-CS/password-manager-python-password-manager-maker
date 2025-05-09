@@ -3,7 +3,7 @@ import json
 import random
 import string
 
-# -------- Password Validation --------
+
 class PasswordValidator:
     @staticmethod
     def isValid(password):
@@ -13,8 +13,6 @@ class PasswordValidator:
         hasNumber = any(c.isdigit() for c in password)
         hasSpecial = any(c in "!@#$%^&*()" for c in password)
         return hasUpper and hasNumber and hasSpecial
-
-# -------- Password Generator --------
 class PasswordGenerator:
     @staticmethod
     def generatePassword(length=12):
@@ -25,8 +23,6 @@ class PasswordGenerator:
             password = ''.join(random.choice(chars) for _ in range(length))
             if PasswordValidator.isValid(password):
                 return password
-
-# -------- Account Class --------
 class Account:
     def __init__(self, name, username, password, category):
         self.name = name
@@ -41,8 +37,6 @@ class Account:
             "password": self.password,
             "category": self.category
         }
-
-# -------- File Handling --------
 class FileStorage:
     dataFile = "data.json"
 
@@ -57,8 +51,6 @@ class FileStorage:
             return {}
         with open(FileStorage.dataFile, "r") as f:
             return json.load(f)
-
-# -------- Password Manager --------
 class PasswordManager:
     def __init__(self, currentUser):
         self.currentUser = currentUser
@@ -153,8 +145,6 @@ class PasswordManager:
                 break
             else:
                 print("Invalid choice!")
-
-# -------- Login System --------
 def loginSystem():
     users = {}
     if os.path.exists("users.json"):
@@ -204,7 +194,6 @@ def registerUser():
     print("Registration successful. Please log in.")
     return loginSystem()
 
-# -------- Main --------
 def main():
     print("Welcome to the Password Manager!")
     if not os.path.exists("users.json") or input("Are you a new user? (y/n): ").lower() == 'y':
